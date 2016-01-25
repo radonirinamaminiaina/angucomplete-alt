@@ -45,23 +45,23 @@
 
     // Set the default template for this directive
     $templateCache.put(TEMPLATE_URL,
-        '<div class="angucomplete-holder" ng-class="{\'angucomplete-dropdown-visible\': showDropdown}">' +
-        '  <input id="{{id}}_value" name="{{inputName}}" ng-class="{\'angucomplete-input-not-empty\': notEmpty}" ng-model="searchStr" ng-disabled="disableInput" type="{{inputType}}" placeholder="{{placeholder}}" maxlength="{{maxlength}}" ng-focus="onFocusHandler()" class="{{inputClass}}" ng-focus="resetHideResults()" ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)"/>' +
-        '  <div id="{{id}}_dropdown" class="angucomplete-dropdown" ng-show="showDropdown">' +
-        '    <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>' +
-        '    <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>' +
-        '    <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{\'angucomplete-selected-row\': $index == currentIndex}">' +
-        '      <div ng-if="imageField" class="angucomplete-image-holder">' +
-        '        <img ng-if="result.image && result.image != \'\'" ng-src="{{result.image}}" class="angucomplete-image"/>' +
-        '        <div ng-if="!result.image && result.image != \'\'" class="angucomplete-image-default"></div>' +
-        '      </div>' +
-        '      <div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>' +
-        '      <div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>' +
-        '      <div ng-if="matchClass && result.description && result.description != \'\'" class="angucomplete-description" ng-bind-html="result.description"></div>' +
-        '      <div ng-if="!matchClass && result.description && result.description != \'\'" class="angucomplete-description">{{result.description}}</div>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>'
+      '<div class="angucomplete-holder" ng-class="{\'angucomplete-dropdown-visible\': showDropdown}">' +
+      '  <input id="{{id}}_value" name="{{inputName}}" ng-class="{\'angucomplete-input-not-empty\': notEmpty}" ng-model="searchStr" ng-disabled="disableInput" type="{{inputType}}" placeholder="{{placeholder}}" maxlength="{{maxlength}}" ng-focus="onFocusHandler()" class="{{inputClass}}" ng-focus="resetHideResults()" ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)"/>' +
+      '  <div id="{{id}}_dropdown" class="angucomplete-dropdown" ng-show="showDropdown">' +
+      '    <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>' +
+      '    <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>' +
+      '    <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{\'angucomplete-selected-row\': $index == currentIndex}">' +
+      '      <div ng-if="imageField" class="angucomplete-image-holder">' +
+      '        <img ng-if="result.image && result.image != \'\'" ng-src="{{result.image}}" class="angucomplete-image"/>' +
+      '        <div ng-if="!result.image && result.image != \'\'" class="angucomplete-image-default"></div>' +
+      '      </div>' +
+      '      <div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>' +
+      '      <div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>' +
+      '      <div ng-if="matchClass && result.description && result.description != \'\'" class="angucomplete-description" ng-bind-html="result.description"></div>' +
+      '      <div ng-if="!matchClass && result.description && result.description != \'\'" class="angucomplete-description">{{result.description}}</div>' +
+      '    </div>' +
+      '  </div>' +
+      '</div>'
     );
 
     function link(scope, elem, attrs, ctrl) {
@@ -226,7 +226,7 @@
         matches = target.match(re);
         if (matches) {
           result = target.replace(re,
-              '<span class="'+ scope.matchClass +'">'+ matches[0] +'</span>');
+            '<span class="'+ scope.matchClass +'">'+ matches[0] +'</span>');
         }
         else {
           result = target;
@@ -297,7 +297,7 @@
 
       function handleOverrideSuggestions(event) {
         if (scope.overrideSuggestions &&
-            !(scope.selectedObject && scope.selectedObject.originalObject === scope.searchStr)) {
+          !(scope.selectedObject && scope.selectedObject.originalObject === scope.searchStr)) {
           if (event) {
             event.preventDefault();
           }
@@ -314,12 +314,12 @@
       function dropdownRowOffsetHeight(row) {
         var css = getComputedStyle(row);
         return row.offsetHeight +
-          parseInt(css.marginTop, 10) + parseInt(css.marginBottom, 10);
+        parseInt(css.marginTop, 10) + parseInt(css.marginBottom, 10);
       }
 
       function dropdownHeight() {
         return dd.getBoundingClientRect().top +
-          parseInt(getComputedStyle(dd).maxHeight, 10);
+        parseInt(getComputedStyle(dd).maxHeight, 10);
       }
 
       function dropdownRow() {
@@ -328,8 +328,8 @@
 
       function dropdownRowTop() {
         return dropdownRow().getBoundingClientRect().top -
-          (dd.getBoundingClientRect().top +
-           parseInt(getComputedStyle(dd).paddingTop, 10));
+        (dd.getBoundingClientRect().top +
+        parseInt(getComputedStyle(dd).paddingTop, 10));
       }
 
       function dropdownScrollTopTo(offset) {
@@ -465,7 +465,7 @@
 
       function getRemoteResults(str) {
         var params = {},
-            url = scope.remoteUrl + encodeURIComponent(str);
+          url = scope.remoteUrl + encodeURIComponent(str);
         if (scope.remoteUrlRequestFormatter) {
           params = {params: scope.remoteUrlRequestFormatter(str)};
           url = scope.remoteUrl;
@@ -491,10 +491,10 @@
           .catch(httpErrorCallback);
 
         /* IE8 compatible
-        scope.remoteApiHandler(str, httpCanceller.promise)
-          ['then'](httpSuccessCallbackGen(str))
-          ['catch'](httpErrorCallback);
-        */
+         scope.remoteApiHandler(str, httpCanceller.promise)
+         ['then'](httpSuccessCallbackGen(str))
+         ['catch'](httpErrorCallback);
+         */
       }
 
       function clearResults() {
@@ -513,8 +513,9 @@
 
       function getLocalResults(str) {
         var i, match, s, value,
-            searchFields = scope.searchFields.split(','),
-            matches = [];
+          searchFields = scope.searchFields.split(','),
+          matches = [],
+          regexSearch;
         if (typeof scope.parseInput() !== 'undefined') {
           str = scope.parseInput()(str);
         }
@@ -523,14 +524,22 @@
 
           for (s = 0; s < searchFields.length; s++) {
             value = extractValue(scope.localData[i], searchFields[s]) || '';
-            match = match || (value.toString().toLowerCase().indexOf(str.toString().toLowerCase()) >= 0);
+            if(scope.firstLetter) {
+              regexSearch = new RegExp("^" + str.toString().toLowerCase());
+              match = match || (value.toString().toLowerCase().match(regexSearch));
+            } else {
+              match = match || (value.toString().toLowerCase().indexOf(str.toString().toLowerCase()) >= 0);
+            }
           }
+
 
           if (match) {
             matches[matches.length] = scope.localData[i];
           }
         }
-        return matches;
+
+        scope.searching = false;
+        processResults(matches, str);
       }
 
       function checkExactMatch(result, obj, str){
@@ -551,14 +560,7 @@
         }
         if (scope.localData) {
           scope.$apply(function() {
-            var matches;
-            if (typeof scope.localSearch() !== 'undefined') {
-              matches = scope.localSearch()(str);
-            } else {
-              matches = getLocalResults(str);
-            }
-            scope.searching = false;
-            processResults(matches, str);
+            getLocalResults(str);
           });
         }
         else if (scope.remoteApiHandler) {
@@ -607,8 +609,8 @@
         }
 
         if (scope.autoMatch && scope.results.length === 1 &&
-            checkExactMatch(scope.results[0],
-              {title: text, desc: description || ''}, scope.searchStr)) {
+          checkExactMatch(scope.results[0],
+            {title: text, desc: description || ''}, scope.searchStr)) {
           scope.showDropdown = false;
         } else if (scope.results.length === 0 && !displayNoResults) {
           scope.showDropdown = false;
@@ -642,8 +644,8 @@
 
       scope.hideResults = function() {
         if (mousedownOn &&
-            (mousedownOn === scope.id + '_dropdown' ||
-             mousedownOn.indexOf('angucomplete') >= 0)) {
+          (mousedownOn === scope.id + '_dropdown' ||
+          mousedownOn.indexOf('angucomplete') >= 0)) {
           mousedownOn = null;
         }
         else {
@@ -781,7 +783,6 @@
         disableInput: '=',
         initialValue: '=',
         localData: '=',
-        localSearch: '&',
         remoteUrlRequestFormatter: '=',
         remoteUrlRequestWithCredentials: '@',
         remoteUrlResponseFormatter: '=',
@@ -798,6 +799,7 @@
         inputClass: '@',
         pause: '@',
         searchFields: '@',
+        firstLetter: '=',
         minlength: '@',
         matchClass: '@',
         clearSelected: '@',
